@@ -24,6 +24,9 @@ public class Disciplina implements Serializable{
 	
 	@OneToMany(mappedBy = "disciplina")
 	private List<Assunto> assuntos = new ArrayList<>();
+	
+	public Disciplina() {
+	}
 
 	public Disciplina(Long id, String nome) {
 		super();

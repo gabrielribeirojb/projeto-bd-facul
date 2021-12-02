@@ -1,7 +1,8 @@
 package com.devsuperior.projetobd.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,32 +10,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_comentario")
-public class Comentario implements Serializable{
+@Table(name = "tb_questao")
+public class Questao implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String texto;
-	private Instant data;
+	
+	private String enunciado;
+	private String[] dicas;
 	
 	@ManyToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
+	@JoinColumn(name = "assunto_id")
+	private Assunto questao_assunto;
 	
-	public Comentario() {
-	}
+	@OneToMany(mappedBy = "questao")
+	private List<RespostaQuestao> respostasQuestoes = new ArrayList<>();
 	
-	public Comentario(Long id, String texto, Instant data) {
+	public Questao(Long id, String enunciado) {
 		super();
 		this.id = id;
-		this.texto = texto;
-		this.data = data;
+		this.enunciado = enunciado;
 	}
 
 	public Long getId() {
@@ -45,29 +47,26 @@ public class Comentario implements Serializable{
 		this.id = id;
 	}
 
-	public String getTexto() {
-		return texto;
+	public String getEnunciado() {
+		return enunciado;
 	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
+	public void setEnunciado(String enunciado) {
+		this.enunciado = enunciado;
 	}
 
-	public Instant getData() {
-		return data;
+	public String[] getDicas() {
+		return dicas;
 	}
 
-	public void setData(Instant data) {
-		this.data = data;
+	public void setDicas(String[] dicas) {
+		this.dicas = dicas;
+	}
+	
+	public List<RespostaQuestao> getRespostasQuestoes() {
+		return respostasQuestoes;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	@Override
 	public int hashCode() {
@@ -85,7 +84,7 @@ public class Comentario implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Comentario other = (Comentario) obj;
+		Questao other = (Questao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -93,4 +92,5 @@ public class Comentario implements Serializable{
 			return false;
 		return true;
 	}
+	
 }

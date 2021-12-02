@@ -29,8 +29,7 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy = "usuario")
 	private List<Comentario> comentarios = new ArrayList<>();
 	
-	public Long getId() {
-		return id;
+	public Usuario() {
 	}
 	
 	public Usuario(Long id, String nome, String email, String senha, String url_foto_perfil) {
@@ -40,6 +39,10 @@ public class Usuario implements Serializable{
 		this.email = email;
 		this.senha = senha;
 		this.url_foto_perfil = url_foto_perfil;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {

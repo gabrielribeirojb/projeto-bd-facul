@@ -27,6 +27,9 @@ public class Aula implements Serializable{
 	@JoinColumn(name = "assunto_id")
 	private Assunto assunto;
 	
+	public Aula() {
+	}
+	
 	public Aula(Long id, String nome, String url_video) {
 		super();
 		this.id = id;

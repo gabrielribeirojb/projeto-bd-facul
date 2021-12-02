@@ -30,6 +30,12 @@ public class Assunto implements Serializable{
 	
 	@OneToMany(mappedBy = "assunto")
 	private List<Aula> aulas = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "questao_assunto")
+    private List<Questao> questoes = new ArrayList<>();
+	
+	public Assunto() {
+	}
 
 	public Assunto(Long id, String nome) {
 		super();
@@ -51,6 +57,30 @@ public class Assunto implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	public List<Aula> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
+	}
+
+	public List<Questao> getQuestoes() {
+		return questoes;
+	}
+
+	public void setQuestoes(List<Questao> questoes) {
+		this.questoes = questoes;
 	}
 
 	@Override
